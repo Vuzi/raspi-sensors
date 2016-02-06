@@ -35,7 +35,7 @@ namespace sensor {
         *channel1 = CH1_HIGH * 256 + CH1_LOW;
     }
 
-    uint32_t TSL2561_sensor::readData(bool iGain, bool tInt, bool iType) {
+    uint32_t TSL2561_sensor::readData(uint16_t iGain, uint16_t tInt, uint16_t iType) {
         uint32_t channel0 = 0x0, channel1 = 0x0;
 
         // Read raw data
@@ -115,7 +115,7 @@ namespace sensor {
         temp += (1 << (LUX_SCALE-1));
 
         // strip off fractional portion
-        lux=temp>>LUX_SCALE;
+        lux = temp >> LUX_SCALE;
 
         return lux;
     }
@@ -124,7 +124,7 @@ namespace sensor {
         std::list<result> results;
 
         // Read the result from the sensor
-        uint32_t lux = readData(false, false, true);
+        uint32_t lux = readData(0, 0, 1);
 
         // Init the data
         resultValue luxValue;

@@ -3,7 +3,9 @@
  * @brief Class implementation for all BMP180 sensors
  * @author Vuzi
  * @version 0.2
- * Based on https://github.com/Seeed-Studio/Grove-RaspberryPi with tweaks and optimisations
+ * Based on https://github.com/Seeed-Studio/Grove-RaspberryPi and
+ * https://github.com/BoschSensortec/BMP180_driver/blob/master/bmp180.c
+ * with tweaks and optimisations
  */
 
 #include "BMP180.h"
@@ -32,64 +34,77 @@ namespace sensor {
         md = readRegisterInt(0xBE);
     }
 
-    uint16_t BMP180_sensor::readUT() {
+    /**
+     * @brief Read the uncompensated temperature
+     * @return The uncompensated temperature
+     */
+    int32_t BMP180_sensor::readUT() {
+        // Write 0x2E at register 0xF4
         writeRegister(0xF4, 0x2E);
-        return readRegisterInt(0xF6);
-    }
 
-    unsigned long BMP180_sensor::readUP() {
-        uint8_t msb, lsb, xlsb;
-
-        // Write data at 0xF4
-        writeRegister(0xF4, 0x34);
+        // Wait for 4.5ms / 4500 microsecondes
+        microsecondSleep(4500);
 
         // Read register 0xF6 (MSB), 0xF7 (LSB), and 0xF8 (XLSB)
-        msb = readRegister(0xF6);
-        lsb = readRegister(0xF7);
-        xlsb = readRegister(0xF8);
+        uint16_t msb = readRegister(0xF6);
+        uint16_t lsb = readRegister(0xF7);
 
-        return (((unsigned long) msb << 16) | ((unsigned long) lsb << 8) | (unsigned long) xlsb) >> (8);
+        return (msb << 8) + lsb;
+    }
+
+    int32_t BMP180_sensor::readUP() {
+        // Write 0x34 at register 0xF4
+        writeRegister(0xF4, 0x34 + (oss << 6));
+
+        // Sleep for 2ms + 3ms << oss
+        microsecondSleep((2 + (3 << oss)) * 1000);
+
+        // Read register 0xF6 (MSB), 0xF7 (LSB), and 0xF8 (XLSB)
+        uint32_t msb = readRegister(0xF6);
+        uint32_t lsb = readRegister(0xF7);
+        uint32_t xlsb = readRegister(0xF8);
+
+        return ((msb << 16) + (lsb << 8) + xlsb) >> (8 - oss);
     }
 
     float BMP180_sensor::convertTemperature(uint16_t ut) {
-        long x1, x2;
+        int32_t x1, x2;
 
-        x1 = (((long)ut - (long)ac6)*(long)ac5) >> 15;
-        x2 = ((long)mc << 11)/(x1 + md);
-        PressureCompensate = x1 + x2;
+        x1 = ((ut - ac6) * ac5) >> 15;
+        x2 = (mc << 11) / (x1 + md);
 
-        float temp = ((PressureCompensate + 8)>>4);
+        b5 = x1 + x2;
 
-        return temp / 10.0;
+        return ((b5 + 8) >> 4) / 10.0;
     }
 
     long BMP180_sensor::convertPressure(unsigned long up) {
-        long x1, x2, x3, b3, b6, p;
-        unsigned long b4, b7;
-        b6 = PressureCompensate - 4000;
-        x1 = (b2 * (b6 * b6)>>12)>>11;
-        x2 = (ac2 * b6)>>11;
+        int32_t x1, x2, x3, b3, b6, p;
+        uint32_t b4, b7;
+
+        b6 = b5 - 4000;
+        x1 = (b2 * (b6 * b6) >> 12) >> 11;
+        x2 = (ac2 * b6) >> 11;
         x3 = x1 + x2;
-        b3 = (((((long)ac1)*4 + x3)) + 2)>>2;
+        b3 = (((ac1 * 4 + x3) << oss) + 2) >> 2;
 
-        // Calculate B4
-        x1 = (ac3 * b6)>>13;
-        x2 = (b1 * ((b6 * b6)>>12))>>16;
-        x3 = ((x1 + x2) + 2)>>2;
-        b4 = (ac4 * (unsigned long)(x3 + 32768))>>15;
+        x1 = (ac3 * b6) >> 13;
+        x2 = (b1 * ((b6 * b6) >> 12)) >> 16;
+        x3 = ((x1 + x2) + 2) >> 2;
+        b4 = (ac4 * (uint32_t)(x3 + 32768)) >> 15;
 
-        b7 = ((unsigned long)(up - b3) * (50000));
-        if (b7 < 0x80000000)
-            p = (b7<<1)/b4;
+        b7 = ((uint32_t)up - b3) * (50000 >> oss);
+
+        if(b7 < 0x80000000)
+            p = (b7 << 1) / b4;
         else
-            p = (b7/b4)<<1;
+            p = (b7/b4) << 1;
 
-        x1 = (p>>8) * (p>>8);
-        x1 = (x1 * 3038)>>16;
-        x2 = (-7357 * p)>>16;
-        p += (x1 + x2 + 3791)>>4;
+        x1 = (p >> 8) * (p >> 8);
+        x1 = (x1 * 3038) >> 16;
+        x2 = (-7357 * p) >> 16;
 
-        return p;
+        return p + ((x1 + x2 + 3791) >> 4);
     }
 
     std::list<result> BMP180_sensor::getResults() {

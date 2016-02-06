@@ -30,6 +30,11 @@ namespace sensor {
             return resultsOrError(e);
         } 
     }
+
+    void sensor::microsecondSleep(int duration) {
+        struct timespec delay = { 0, duration *  1000 };
+        nanosleep(&delay, NULL);
+    }
     
     // sensorException class
     sensorException::sensorException(const std::string& msg, sensorErrorCode _errorCode) : runtime_error(msg) {

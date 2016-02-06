@@ -14,6 +14,8 @@
 #include <stdexcept>
 #include <functional>
 
+#include <time.h>
+
 #include "format.h"
 
 /**
@@ -91,6 +93,12 @@ namespace sensor {
              *  @return The type of the sensor
              */
             virtual const std::string getType();
+
+            /**
+             * @brief Sleep for the specified amound of microsecondes
+             * @param The duration of the sleep, in microsecondes
+             */
+            void microsecondSleep(int);
 
             /**
              *  @brief Get the results of the sensor. Will throw exception if the read fails

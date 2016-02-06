@@ -74,10 +74,12 @@ namespace sensor {
             int16_t mc;
             int16_t md;
         
-            long PressureCompensate;
+            int32_t b5;
+
+            uint16_t oss = 0;
         
-            uint16_t readUT();
-            unsigned long readUP();
+            int32_t readUT();
+            int32_t readUP();
             
             float convertTemperature(uint16_t ut);
             long convertPressure(unsigned long up);

@@ -139,7 +139,7 @@ namespace sensor {
              * Read raw data and convert it to a readable lux value
              * @return The lux value read from the sensor
              */
-            uint32_t readData(bool iGain, bool tInt, bool iType);
+            uint32_t readData(uint16_t iGain, uint16_t tInt, uint16_t iType);
     };
 
 }
