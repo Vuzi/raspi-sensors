@@ -15,7 +15,7 @@ Nodejs, npm and node-gyp are required. This actual version uses the *0.12.6* ver
 To use **i2c** sensors, the i2c driver should be loading, usually using [raspi-config](https://learn.adafruit.com/adafruits-raspberry-pi-lesson-4-gpio-setup/configuring-i2c). The file (usually `/dev/i2c-1`) used to communicate with the bus will be asked during the installation.
 
 ### GPIO sensors
-If you wish to use **GPIO** sensors, an existing installation of [*wiringPi*](http://wiringpi.com/pins/) is also required. The static library of **wiringPi** should be generated, instead of the default shared one. To do so, run :
+If you wish to use **GPIO** sensors, an existing installation of [wiringPi](http://wiringpi.com/pins/) is also required. The static library of **wiringPi** should be generated, instead of the default shared one. To do so, run :
 ````
 make install-static
 ````
