@@ -1,14 +1,14 @@
 {
   "name": "raspi-sensors",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Raspberry-pi plugin to easily fetch data from sensors (DHT22, BMP180, TLS2561 and PIR)",
   "author": "Guillaume VILLEREZ <vuzi@vuzi.fr>",
-  "repository" : {
-    "type" : "git",
-    "url" : "https://github.com/Vuzi/raspi-sensor"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Vuzi/raspi-sensor"
   },
-  "bugs" : {
-    "url" : "https://github.com/Vuzi/raspi-sensor/issues"
+  "bugs": {
+    "url": "https://github.com/Vuzi/raspi-sensor/issues"
   },
   "main": "build/raspi-sensors",
   "scripts": {
@@ -16,7 +16,7 @@
     "install": "bash install.sh"
   },
   "gypfile": true,
-    "keywords": [
+  "keywords": [
     "rapsberry-pi",
     "rapsberry",
     "sensor",
