@@ -1,0 +1,22 @@
+{
+  "name": "raspi-sensors",
+  "version": "0.1.0",
+  "description": "Raspberry-pi plugin to easily fetch data from sensors (DHT22, BMP180, TLS2561 and PIR)",
+  "main": "build/todo",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "install": "node-gyp rebuild"
+  },
+  "keywords": [
+    "rapsberry-pi",
+    "rapsberry",
+    "sensor",
+    "DHT22",
+    "BMP180",
+    "TLS2561",
+    "PIR"
+  ],
+  "author": "Vuzi",
+  "license": "Apache-2.0",
+  "gypfile": true
+}
