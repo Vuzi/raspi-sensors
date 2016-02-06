@@ -1,6 +1,13 @@
 # raspi-sensor
 Nodejs C++ plugin, allowing to easily read data from raspberryPi's sensors.
 
+## Supported sensors
+For now, those sensors are supported :
+- DHT22 (GPIO)
+- PIR (GPIO)
+- BMP180 (i2c)
+- TLS2561 (i2c)
+
 ## Requirement
 Nodejs, npm and node-gyp are required. This actual version uses the *0.12.6* version of Nodejs, and may or may not be compatible with newest or oldest versions.
 
