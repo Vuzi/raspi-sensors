@@ -1,6 +1,6 @@
 {
   "name": "raspi-sensors",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Raspberry-pi plugin to easily fetch data from sensors (DHT22, BMP180, TLS2561 and PIR)",
   "author": "Guillaume VILLEREZ <vuzi@vuzi.fr>",
   "repository": {
