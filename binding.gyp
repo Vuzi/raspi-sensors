@@ -35,9 +35,9 @@
     },
 
     "targets": [
-        # MeteoNode with i2c and GPIO activated (note GPIO requires wiringPi)
+        # raspi-sensor with i2c and GPIO activated (note GPIO requires wiringPi)
         {
-            "target_name": "meteonode-gpio",
+            "target_name": "raspi-sensors-gpio",
             "sources": [
                 "src/i2c_sensor.cc",
                 "src/TSL2561.cc",
@@ -51,7 +51,7 @@
         },
         # MeteoNode only with i2c devices
         {
-            "target_name": "meteonode",
+            "target_name": "raspi-sensors",
             "sources": [
                 "src/i2c_sensor.cc",
                 "src/TSL2561.cc",

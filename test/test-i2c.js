@@ -1,15 +1,15 @@
-// Load MeteoNode plugin
-var MeteoNode = require('./build/Debug/meteonode');
+// Load raspi-sensors plugin
+var RaspiSensors = require('../build/raspi-sensors');
 
-console.log('MeteoNode test v0.2');
+console.log('raspi-sensors test v0.1');
 
 // Create some sensors
-var TSL2561 = new MeteoNode.Sensor({
+var TSL2561 = new RaspiSensors.Sensor({
 	type    : "TSL2561",
 	address : 0X39
 }, "light_sensor");
 
-var BMP180 = new MeteoNode.Sensor({
+var BMP180 = new RaspiSensors.Sensor({
 	type    : "BMP180",
 	address : 0x77
 }, "temp_sensor");
@@ -33,9 +33,9 @@ BMP180.fetch(dataLog);
 TSL2561.fetchInterval(dataLog, 4);
 BMP180.fetchInterval(dataLog, 5);
 
-// After 20s of login, stop everything
+// After 20s of logging, stop everything
 setTimeout(function() {
-	console.log("Time to stop the loging of values!");
+	console.log("Time to stop the logging of values!");
 
 	TSL2561.fetchClear();
 	BMP180.fetchClear();
