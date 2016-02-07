@@ -25,7 +25,9 @@
 
     "variables" : {
         "gpio" : "true",
-        "wiringPi-lib" : "-lwiringPi", # wiringPi static lib, ignore if not used
+        "cam"  : "true",
+        "wiringPi-lib" : "-lwiringPi", # wiringPi lib, ignore if not used
+        "raspicam-lib" : "-lraspicam", # raspicam lib, ignore if not used
         "i2c-bus-file" : "/dev/i2c-1"  # i2c file to use for i2c sensors
     },
 
@@ -53,6 +55,13 @@
                         ],
                         "defines": [ "USE_GPIO" ],
                         "libraries": [ "<(wiringPi-lib)" ]
+                    }
+                ],
+                [   # raspi-sensor with the camera activated (note that Raspicam is required)
+                    'cam == "true"', {
+                        "sources": [],
+                        "defines": [ "USE_CAM" ],
+                        "libraries": [ "<(raspicam-lib)" ]
                     }
                 ]
             ]

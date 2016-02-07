@@ -12,6 +12,16 @@ while true; do
     esac
 done
 
+# if cam module should be installed
+while true; do
+    read -p "Do you want to use the camera with this plugin ? (Y/n) " cam
+    case $cam in
+        ''|[Yy]* ) cam=true; break;;
+        [Nn]* ) cam=false; break;;
+        * ) echo "Please answer yes or no";;
+    esac
+done
+
 while true; do
     read -p "i2c needs to be functioning, where is located the i2c bus to use ? (/dev/i2c-1) " i2c_file
     case $i2c_file in
@@ -45,7 +55,7 @@ fi
 
 echo "Now running node-gyp build..."
 
-node-gyp build raspi-sensors --i2c-bus-file="$i2c_file" --gpio="$gpio" --$target
+node-gyp build raspi-sensors --i2c-bus-file="$i2c_file" --gpio="$gpio" --cam="$cam" --$target
 
 if [ $? -ne 0 ]; then
     exit $?;

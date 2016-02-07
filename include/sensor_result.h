@@ -42,7 +42,7 @@ namespace sensor {
         int i;
         float f;
         double d;
-        // TODO : photo
+        const std::string s;
     };
     
     typedef union resultValue resultValue;
