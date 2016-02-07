@@ -59,7 +59,9 @@
                 ],
                 [   # raspi-sensor with the camera activated (note that Raspicam is required)
                     'cam == "true"', {
-                        "sources": [],
+                        "sources": [
+                            "src/wrapper_cam.cc"
+                        ],
                         "defines": [ "USE_CAM" ],
                         "libraries": [ "<(raspicam-lib)" ]
                     }

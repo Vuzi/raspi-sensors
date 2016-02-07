@@ -25,7 +25,7 @@ done
 while true; do
     read -p "i2c needs to be functioning, where is located the i2c bus to use ? (/dev/i2c-1) " i2c_file
     case $i2c_file in
-        '' ) i2c_file='/usr/local/lib/libwiringPi.a'; break;;
+        '' ) i2c_file='/dev/i2c-1'; break;;
         * ) break;;
     esac
 done
@@ -48,14 +48,14 @@ fi
 
 echo "Now running node-gyp configure..."
 
-node-gyp configure
+node-gyp configure --i2c-bus-file="$i2c_file" --gpio="$gpio" --cam="$cam"
 if [ $? -ne 0 ]; then
 	exit $?;
 fi
 
 echo "Now running node-gyp build..."
 
-node-gyp build raspi-sensors --i2c-bus-file="$i2c_file" --gpio="$gpio" --cam="$cam" --$target
+node-gyp build raspi-sensors --`echo $target | awk '{print tolower($0)}'`
 
 if [ $? -ne 0 ]; then
     exit $?;
