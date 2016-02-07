@@ -25,9 +25,13 @@ You should also look at the tests files (located in the test sub directory) and 
 ## Building the plugin
 Once everything is installed, simply run :
 ````
+# To use i2c sensors
+node-gyp configure --gpio=false
+node-gyp build --release
+
+# To use i2c and gpio sensors
 node-gyp configure
-node-gyp build --release              # To use i2c and gpio sensors
-node-gyp build --gpio=false --release # To use i2c sensors
+node-gyp build--release 
 ````
 You should now be able to run the sensor test 'test.js' :
 ````
