@@ -43,3 +43,11 @@ If your configuration is correct, you'll see some data from your sensors.
 
 ## Note
 Note that, for now, root credentials are needed for any GPIO sensors because **wiringPi** needs it to access the GPIO bus, and because we need to access the i2c located in */dev*.
+
+## Disclaimer
+Every library used is the property of their respective owners and/or collaborators.
+- NodeJs : https://raw.githubusercontent.com/nodejs/node/master/LICENSE
+- C++ Format : https://raw.githubusercontent.com/cppformat/cppformat/master/LICENSE.rst
+- WiringPi : http://wiringpi.com/
+- RaspiCam C++ : http://www.uco.es/investiga/grupos/ava/node/40
+
