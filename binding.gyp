@@ -7,15 +7,9 @@
         "cflags!": [ "-fno-exceptions" ],
         "cflags_cc!": [ "-fno-exceptions" ],
 
-        "include_dirs": [ "include" ],
+        "include_dirs": [ "include", "/usr/local/include" ],
 
-        "sources": [
-            "src/format.cc",
-            "src/wrapper_sensor.cc",
-            "src/plugin.cc",
-            "src/sensor.cc",
-            "src/sensor_result.cc"
-        ],
+        "libraries": [ "-L/usr/local/lib" ],
 
         "configurations": {
             "Debug" : {
@@ -30,34 +24,38 @@
     },
 
     "variables" : {
-        "wiringPi-static-lib" : "/usr/local/lib/libwiringPi.a", # wiringPi static lib, ignore if not used
-        "i2c-bus-file" : "/dev/i2c-1"                           # i2c file to use for i2c sensors
+        "gpio" : "true",
+        "wiringPi-lib" : "-lwiringPi", # wiringPi static lib, ignore if not used
+        "i2c-bus-file" : "/dev/i2c-1"  # i2c file to use for i2c sensors
     },
 
     "targets": [
-        # raspi-sensor with i2c and GPIO activated (note GPIO requires wiringPi)
-        {
-            "target_name": "raspi-sensors-gpio",
-            "sources": [
-                "src/i2c_sensor.cc",
-                "src/TSL2561.cc",
-                "src/BMP180.cc",
-                "src/gpio_sensor.cc",
-                "src/DHT22.cc",
-                "src/PIR.cc",
-            ],
-            "defines": [ "USE_GPIO", "I2C_BUS_FILE=\"<(i2c-bus-file)\"" ],
-            "libraries": [ "<(wiringPi-static-lib)", "-Wl,-rpath,<!(pwd)/build/Debug/" ]
-        },
-        # MeteoNode only with i2c devices
         {
             "target_name": "raspi-sensors",
             "sources": [
+                "src/format.cc",
+                "src/wrapper_sensor.cc",
+                "src/plugin.cc",
+                "src/sensor.cc",
+                "src/sensor_result.cc",
                 "src/i2c_sensor.cc",
                 "src/TSL2561.cc",
                 "src/BMP180.cc"
             ],
             "defines": [ "I2C_BUS_FILE=\"<(i2c-bus-file)\"" ],
+            'conditions': [
+                [   # raspi-sensor with GPIO activated (note that GPIO requires wiringPi)
+                    'gpio == "true"', {
+                        "sources": [
+                            "src/gpio_sensor.cc",
+                            "src/DHT22.cc",
+                            "src/PIR.cc",
+                        ],
+                        "defines": [ "USE_GPIO" ],
+                        "libraries": [ "<(wiringPi-lib)" ]
+                    }
+                ]
+            ]
         }
     ]
 }
