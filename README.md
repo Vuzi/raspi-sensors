@@ -54,5 +54,4 @@ Every library used is the property of their respective owners and/or collaborato
 - NodeJs : https://raw.githubusercontent.com/nodejs/node/master/LICENSE
 - C++ Format : https://raw.githubusercontent.com/cppformat/cppformat/master/LICENSE.rst
 - WiringPi : http://wiringpi.com/
-- RaspiCam C++ : http://www.uco.es/investiga/grupos/ava/node/40
 
