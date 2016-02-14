@@ -12,7 +12,7 @@ var DHT22 = new RaspiSensors.Sensor({
 // Define a callback
 var dataLog = function(err, data) {
 	if(err) {
-		console.error("An error occured!");
+		console.error("An error occurred!");
 		console.error(err.cause);
 		return;
 	}
