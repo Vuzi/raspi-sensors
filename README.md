@@ -104,8 +104,9 @@ BMP180.fetchInterval(function(err, data) {
 	console.log(data);
 }, 5); // Fetch data every 5 seconds
 ````
+Intervals can be cleaned with the `fetchClear` method.
 
-## Sensors type and returned values
+## Sensors types and returned values
 | Sensor name   | Sensor type | Value type      |
 | ------------- | ----------- | --------------- |
 | TSL2561       | TSL2561     | Light intensity |
