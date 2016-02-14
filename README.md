@@ -124,6 +124,13 @@ Intervals can be cleaned with the `fetchClear` method.
 | Humidity        | Percent        | %                  |
 | Boolean         | Boolean        | Boolean            |
 
+## Example
+A working project using this plugin can be found here : https://github.com/Vuzi/MeteoNode
+
+![](http://i.imgur.com/mFI8Agz.png)
+
+This project provides a web interface to monitor any raspberry pi sensor used, and stores data in a mongoDB database.
+
 ## Note
 Note that, for now, root credentials are needed for any GPIO sensors because **wiringPi** needs it to access the GPIO bus, and because we need to access the i2c located in */dev*.
 
