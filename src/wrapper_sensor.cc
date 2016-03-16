@@ -202,6 +202,9 @@ void SensorWrapper::fetch(const FunctionCallbackInfo<Value>& args, bool repeatab
             return s->getResultsOrError();
         },
         [callback, isolate](sensor::sensor* s, sensor::resultsOrError results) {
+        	// Local scope handle
+    		HandleScope scope(isolate);
+
             // Local reference of the callback
             Local<Function> cb = Local<Function>::New(isolate, callback);
 
