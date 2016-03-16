@@ -9,7 +9,7 @@ For now, those sensors are supported :
 - TLS2561 (i2c)
 
 ## Requirement
-Nodejs, npm and node-gyp are required. This actual version uses the *0.12.6* version of Nodejs, and may or may not be compatible with newest or oldest versions.
+Nodejs, npm and node-gyp are required. This actual version uses the *4.2.1* version of Nodejs, and may or may not be compatible with newer or older versions (but should be with newer versions).
 
 ### i2c sensors
 To use **i2c** sensors, the i2c driver should be loading, usually using [raspi-config](https://learn.adafruit.com/adafruits-raspberry-pi-lesson-4-gpio-setup/configuring-i2c). The file (usually `/dev/i2c-1`) used to communicate with the bus will be asked during the installation.
