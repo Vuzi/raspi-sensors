@@ -1,4 +1,4 @@
-# raspi-sensor
+# Raspi-sensor
 Nodejs C++ plugin, allowing to easily read data from raspberryPi's sensors.
 
 ## Supported sensors
