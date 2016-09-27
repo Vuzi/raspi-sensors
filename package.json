@@ -21,6 +21,7 @@
     "rapsberry",
     "sensor",
     "DHT22",
+    "DHT11",
     "BMP180",
     "TLS2561",
     "PIR"

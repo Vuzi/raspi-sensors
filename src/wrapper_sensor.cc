@@ -2,6 +2,7 @@
 
 #ifdef USE_GPIO
 #include "DHT22.h"
+#include "DHT11.h"
 #include "PIR.h"
 #endif
 #include "TSL2561.h"
@@ -15,6 +16,11 @@ const struct sensor::sensorConf conf[] = {
         type    : "DHT22",
         bus     : sensor::GPIO,
         factory : sensor::DHT22_sensor::create
+    },
+    {
+        type    : "DHT11",
+        bus     : sensor::GPIO,
+        factory : sensor::DHT11_sensor::create
     },
     {
         type    : "PIR",
@@ -63,7 +69,7 @@ sensor::sensor* SensorWrapper::InitSensor(const Local<String>& sensorName, const
     const std::string type = std::string(*value);
 
     const size_t size = std::extent<decltype(conf)>::value;
-    
+
     for(size_t i = 0; i < size; i++) {
         if(conf[i].type == type) {
             const Local<String> prop = String::NewFromUtf8(isolate, (conf[i].bus == sensor::GPIO ? "pin" : "address"));
@@ -93,7 +99,7 @@ sensor::sensor* SensorWrapper::InitSensor(const Local<String>& sensorName, const
 }
 
 void SensorWrapper::SendError(sensor::sensor* s, sensor::sensorException& e, Isolate* isolate, Local<Function>& cb) {
-    Local<Object> result = Object::New(isolate); 
+    Local<Object> result = Object::New(isolate);
 
     Local<String> cause = String::NewFromUtf8(isolate, e.what());
     Local<Number> code = Number::New(isolate, e.code());
@@ -108,8 +114,8 @@ void SensorWrapper::SendError(sensor::sensor* s, sensor::sensorException& e, Iso
 
 void SensorWrapper::SendResult(sensor::sensor* s, sensor::result& r, Isolate* isolate, Local<Function>& cb) {
     // Get the type of value & the value
-    Local<Object> result = Object::New(isolate); 
-    
+    Local<Object> result = Object::New(isolate);
+
     Local<String> type;
     Local<String> unit;
     Local<String> unit_display;
@@ -151,7 +157,7 @@ void SensorWrapper::SendResult(sensor::sensor* s, sensor::result& r, Isolate* is
         unit_display = String::NewFromUtf8(isolate, "");
         value = Number::New(isolate, 0);
     }
-    
+
     result->Set(String::NewFromUtf8(isolate, "type"), type);
     result->Set(String::NewFromUtf8(isolate, "unit"), unit);
     result->Set(String::NewFromUtf8(isolate, "unit_display"), unit_display);
@@ -196,7 +202,7 @@ void SensorWrapper::fetch(const FunctionCallbackInfo<Value>& args, bool repeatab
     Persistent<Function, CopyablePersistentTraits<Function>> callback(isolate, cb);
     Persistent<Object, CopyablePersistentTraits<Object>> sensorWrapperObj(isolate, args.Holder());
 
-    scheduler::scheduler<sensor::sensor*, sensor::resultsOrError>* handler = 
+    scheduler::scheduler<sensor::sensor*, sensor::resultsOrError>* handler =
     new scheduler::scheduler<sensor::sensor*, sensor::resultsOrError>(_s,
         [](sensor::sensor* s) {
             return s->getResultsOrError();

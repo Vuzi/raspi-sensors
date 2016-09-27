@@ -3,7 +3,8 @@ Nodejs C++ plugin, allowing to easily read data from raspberryPi's sensors.
 
 ## Supported sensors
 For now, those sensors are supported :
-- DHT22 (GPIO)
+- DHT22(or DHT21) (GPIO)
+- DHT11 (GPIO)
 - PIR (GPIO)
 - BMP180 (i2c)
 - TLS2561 (i2c)
@@ -38,7 +39,7 @@ node-gyp build --release
 
 # To use i2c and gpio sensors
 node-gyp configure
-node-gyp build--release 
+node-gyp build--release
 ````
 You should now be able to run the sensor test 'test.js' :
 ````bash
@@ -112,7 +113,7 @@ Intervals can be cleaned with the `fetchClear` method.
 | TSL2561       | TSL2561     | Light intensity |
 | BMP180        | BMP180      | Temperature     |
 |               |             | Pressure        |
-| DHT22         | DHT22       | Temperature     |
+| DHT22/21/11   | DHT22/21/11 | Temperature     |
 |               |             | Humidity        |
 | PIR Motion Sensor | PIR     | Boolean         |
 
@@ -139,4 +140,3 @@ Every library used is the property of their respective owners and/or collaborato
 - NodeJs : https://raw.githubusercontent.com/nodejs/node/master/LICENSE
 - C++ Format : https://raw.githubusercontent.com/cppformat/cppformat/master/LICENSE.rst
 - WiringPi : http://wiringpi.com/
-
