@@ -49,7 +49,8 @@
                         "sources": [
                             "src/gpio_sensor.cc",
                             "src/DHT22.cc",
-                            "src/PIR.cc",
+                            "src/DHT11.cc",
+                            "src/PIR.cc"
                         ],
                         "defines": [ "USE_GPIO" ],
                         "libraries": [ "<(wiringPi-lib)" ]
