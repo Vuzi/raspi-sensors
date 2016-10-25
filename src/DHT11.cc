@@ -82,13 +82,13 @@ namespace sensor {
             if (readData(&iHumidity, &iTemp) == 1) {
                 // Humidity
                 resultValue humidityValue;
-                humidityValue.f = (float)(iHumidity/10.0);
+                humidityValue.f = iHumidity;
 
                 result humidity(resultType::HUMIDITY, humidityValue);
 
                 // Temperature
                 resultValue tempValue;
-                tempValue.f = (float)(iTemp/10.0);
+                tempValue.f = iTemp;
 
                 result temp(resultType::TEMPERATURE, tempValue);
 
