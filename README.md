@@ -13,23 +13,23 @@ For now, those sensors are supported :
 Nodejs, npm and node-gyp are required. This actual version uses the *4.2.1* version of Nodejs, and may or may not be compatible with newer or older versions (but should be with newer versions).
 
 ### i2c sensors
-To use **i2c** sensors, the i2c driver should be loading, usually using [raspi-config](https://learn.adafruit.com/adafruits-raspberry-pi-lesson-4-gpio-setup/configuring-i2c). The file (usually `/dev/i2c-1`) used to communicate with the bus will be asked during the installation.
+To use **i2c** sensors, the i2c driver should be loaded, usually using [raspi-config](https://learn.adafruit.com/adafruits-raspberry-pi-lesson-4-gpio-setup/configuring-i2c). The file (usually `/dev/i2c-1`) used to communicate with the bus will be asked during the installation.
 
 ### GPIO sensors
 If you wish to use **GPIO** sensors, an existing installation of [wiringPi](http://wiringpi.com/pins/) is required. The shared library of **wiringPi** should be generated, and present in the default location, i.e. `/usr/local/lib`.
 
 ### Compiling
-Finally, **node-gyp**, **g++/gcc 4.8.2** and **Make** are also needed to compile and generate the plugin. You can install **node-gyp** with npm, and **g++/gcc** and **Make** with your favorite package manager.
+Finally, **node-gyp**, **g++/gcc 4.8.2** and **Make** are also needed to compile and generate the plugin. You can install **node-gyp** with **npm**, and **g++/gcc** and **Make** with your favorite package manager.
 
-You should also look at the tests files (located in the test sub directory) and modify the pin and addresses according to your own configuration, using **WiringPi** own [notation](http://wiringpi.com/pins/). If any sensor isn't connected, feel free to comment its initialization.
+You should also look at the tests files (located in the test sub directory) and modify the pins and addresses according to your own configuration, using **WiringPi** own [notation](http://wiringpi.com/pins/) form GPIO sensors. If any sensor isn't connected, feel free to comment its initialization.
 
 ## Building the plugin
 
 ### With npm
-npm will run the `install.sh` script during the installation of the plugin. If all the requierments are met, all should go seamless and be ready to use right after !
+**npm** will run the `install.sh` script during the installation of the plugin. If all the requierments are met, all should go seamless and be ready to use right after!
 
 ### Whitout npm
-**Note** : this is only for manual installation, npm users are not concerned
+**Note** : this is only for manual installation, npm users are not concerned.
 
 Once everything is installed, simply run :
 ````bash
@@ -133,7 +133,7 @@ A working project using this plugin can be found here : https://github.com/Vuzi/
 This project provides a web interface to monitor any raspberry pi sensor used, and stores data in a mongoDB database.
 
 ## Note
-Note that, for now, root credentials are needed for any GPIO sensors because **wiringPi** needs it to access the GPIO bus, and because we need to access the i2c located in */dev*.
+Note that, for now, root credentials are needed for any GPIO sensors because **wiringPi** needs it to access the GPIO bus, and because we need to access the i2c located in `/dev`.
 
 ## Disclaimer
 Every library used is the property of their respective owners and/or collaborators.
