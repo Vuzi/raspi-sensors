@@ -61,11 +61,8 @@ namespace sensor {
 
         // Check we read 40 bits (8bit x 5 ) + verify checksum in the last byte
         if ((dht11_dat[4] == ((dht11_dat[0] + dht11_dat[1] + dht11_dat[2] + dht11_dat[3]) & 0xFF))) {
-            *piHumidity = (int) dht11_dat[0];
-            *piTemp = (int) dht11_dat[2];
-
-            if ((dht11_dat[2] & 0x80) != 0)
-                *piTemp *= -1;
+            *piHumidity = (int)dht11_dat[0];
+            *piTemp = (int)(dht11_dat[2] & 0x7F);
 
             return 1;
         } else

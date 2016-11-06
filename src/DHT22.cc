@@ -7,7 +7,7 @@
  */
 
 #include "DHT22.h"
- 
+
 namespace sensor {
 
     DHT22_sensor::DHT22_sensor(unsigned _pin, std::string _name):gpio_sensor(_pin, _name) {}
@@ -62,7 +62,7 @@ namespace sensor {
         // Check we read 40 bits (8bit x 5 ) + verify checksum in the last byte
         if ((dht22_dat[4] == ((dht22_dat[0] + dht22_dat[1] + dht22_dat[2] + dht22_dat[3]) & 0xFF))) {
             *piHumidity = ((int)dht22_dat[0] << 8) + (int)dht22_dat[1];
-            *piTemp = ((int)dht22_dat[2] << 8 ) + dht22_dat[3];
+            *piTemp = ((int)(dht22_dat[2] & 0x7F) << 8 ) + dht22_dat[3];
 
             if ((dht22_dat[2] & 0x80) != 0)
                 *piTemp *= -1;
@@ -114,4 +114,3 @@ namespace sensor {
     }
 
 }
-
