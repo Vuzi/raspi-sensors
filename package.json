@@ -1,6 +1,6 @@
 {
   "name": "raspi-sensors",
-  "version": "0.2.10",
+  "version": "0.2.11",
   "description": "Raspberry-pi plugin to easily fetch data from GPIO and i2c sensors",
   "author": "Guillaume Villerez <vuzi@vuzi.fr>",
   "repository": {
