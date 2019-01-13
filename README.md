@@ -10,7 +10,7 @@ For now, those sensors are supported :
 - TLS2561 (i2c)
 
 ## Requirement
-Nodejs, npm and node-gyp are required. This actual version uses the *4.2.1* version of Nodejs, and may or may not be compatible with newer or older versions (but should be with newer versions).
+Nodejs, npm and node-gyp are required. This actual version uses the *8.11.1* version of Nodejs, and may or may not be compatible with newer or older versions (but should be with newer versions).
 
 ### i2c sensors
 To use **i2c** sensors, the i2c driver should be loaded, usually using [raspi-config](https://learn.adafruit.com/adafruits-raspberry-pi-lesson-4-gpio-setup/configuring-i2c). The file (usually `/dev/i2c-1`) used to communicate with the bus will be asked during the installation.
@@ -43,9 +43,9 @@ node-gyp build--release
 ````
 You should now be able to run the sensor test 'test.js' :
 ````bash
-sudo node test/test_i2c.js  # Test some i2c sensors
-sudo node test/test_gpio.js # Test a GPIO sensor
-sudo node test/test_all.js  # Test both GPIO and i2c sensors
+node test/test_i2c.js  # Test some i2c sensors
+node test/test_gpio.js # Test a GPIO sensor
+node test/test_all.js  # Test both GPIO and i2c sensors
 ````
 If your configuration is correct, you'll see some data from your sensors.
 
@@ -131,9 +131,6 @@ A working project using this plugin can be found here : https://github.com/Vuzi/
 ![](http://i.imgur.com/mFI8Agz.png)
 
 This project provides a web interface to monitor any raspberry pi sensor used, and stores data in a mongoDB database.
-
-## Note
-Note that, for now, root credentials are needed for any GPIO sensors because **wiringPi** needs it to access the GPIO bus, and because we need to access the i2c located in `/dev`.
 
 ## Disclaimer
 Every library used is the property of their respective owners and/or collaborators.
