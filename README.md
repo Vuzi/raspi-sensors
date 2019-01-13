@@ -1,5 +1,5 @@
 # Raspi-sensor
-Nodejs C++ plugin, allowing to easily read data from raspberryPi's sensors.
+Nodejs C++ plugin, allowing to easily read data from raspberryPi's sensors. As of 2019, the plugin is still compiling and working exactly as intended (minus a deprecation warning from nodejs that I'll have to fix in the near future) with tu current Raspian node/npm/nodegyp/gcc versions !
 
 ## Supported sensors
 For now, those sensors are supported :
