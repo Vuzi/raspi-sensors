@@ -1,3 +1,11 @@
+# ⛔️ DEPRECATED ⛔️
+As of now, and since a few years the project won't compile. Node's V8 changed, wiringPi is no longer supported and I haven't started my Raspberry in 2 years. And let's be honest, there's better ways to do what that project does than going through a C++ binding using node-gyp. It was a fun little experiment, and I still might do a more modern "plug and play" sensor reading app using the lib mentionned below, but this particular repo is an artifact of the past.
+
+If you're looking to read sensors through GPIO you can use https://www.npmjs.com/package/onoff and if you're looking to read I2C sensors, you could use https://www.npmjs.com/package/i2c-bus. I'm sure there's also plenty higher level lib floating around.
+
+
+*Previous description below*
+
 # Raspi-sensor
 Nodejs C++ plugin, allowing to easily read data from raspberryPi's sensors. As of 2019, the plugin is still compiling and working exactly as intended (minus a deprecation warning from nodejs that I'll have to fix in the near future) with tu current Raspian node/npm/nodegyp/gcc versions !
 
